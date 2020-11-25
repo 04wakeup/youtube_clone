@@ -10,8 +10,9 @@ import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 
 var app = express();
-//    Middleware
-app.use(helmet());
+// Middleware
+// helmet : set it for csp problem to play a video 
+// app.use( helmet({ contentSecurityPolicy: false }));  
 app.set("view engine", "pug");
 app.use(cookieParser());
 app.use(bodyParser.json());

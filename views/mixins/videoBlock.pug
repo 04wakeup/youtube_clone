@@ -1,0 +1,8 @@
+//- mixin works like a function
+//- video. => video tag
+mixin videoBlock(video = {})
+    .videoBlock 
+        video.videoBlock__thumbnail(src=video.videoFile, controls=true)
+        h4.videoBlock__title=video.title 
+        h6.videoBlock__views=video.views            
+        
