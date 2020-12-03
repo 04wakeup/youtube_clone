@@ -4,7 +4,7 @@ import Video from "../models/Video";
 export const home = async (req, res) => {
   // use async, await to handle data asynchrously
   try {
-    const videos = await Video.find({});
+    const videos = await Video.find({}).sort({ _id: -1 });
     res.render("Home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
@@ -18,7 +18,7 @@ export const search = (req, res) => {
     query: { term: searchingBy },
   } = req;
   console.log(searchingBy);
-  res.render("Search", { pageTitle: "Search", searchingBy, videos });
+  res.render("Search", { pageTitle: "Search", searchingBy });
 };
 
 // export const videos = (req, res) => res.render("Videos", {pageTitle: "Videos"});
@@ -69,7 +69,7 @@ export const postEditVideo = async (req, res) => {
   } = req;
   try {
     await Video.findOneAndUpdate({ _id: id }, { title, description });
-    res.redirect(route.videoDetail(id));
+    res.redirect(routes.videoDetail(id));
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -82,6 +82,8 @@ export const deleteVideo = async (req, res) => {
 
   try {
     await Video.findOneAndRemove({ _id: id });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
   res.redirect(routes.home);
 };
