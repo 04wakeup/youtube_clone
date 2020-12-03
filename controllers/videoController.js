@@ -5,6 +5,7 @@ export const home = async (req, res) => {
   // use async, await to handle data asynchrously
   try {
     const videos = await Video.find({});
+    console.log(videos);
     res.render("Home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);
