@@ -12,13 +12,19 @@ export const home = async (req, res) => {
   }
 };
 
-export const search = (req, res) => {
+export const search = async (req, res) => {
   // const searchingBy = req.query.term; sasme as below
   const {
     query: { term: searchingBy },
   } = req;
+  let videos = [];
+  try {
+    videos = await Video.find({ title: { $regex: searchingBy, $options: "i" } }); // use Regex for insensitive
+  } catch (error) {
+    console.log(error);
+  }
   console.log(searchingBy);
-  res.render("Search", { pageTitle: "Search", searchingBy });
+  res.render("Search", { pageTitle: "Search", searchingBy, videos });
 };
 
 // export const videos = (req, res) => res.render("Videos", {pageTitle: "Videos"});
@@ -29,6 +35,7 @@ export const postUpload = async (req, res) => {
     body: { title, description },
     file: { path },
   } = req;
+  // insert data on DB
   const newVideo = await Video.create({
     fileUrl: path,
     title,
