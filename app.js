@@ -3,11 +3,14 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import passport from "passport";
 import { localMiddlewares } from "./middlewares";
 import routes from "./routes";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
+
+import "./passport";
 
 var app = express();
 // Middleware
@@ -20,6 +23,8 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev")); // order is very important!
+app.use(passport.initialize()); // create info from cookie above(cookieParser)
+app.use(passport.session()); // save session
 
 app.use(localMiddlewares);
 app.use(routes.home, globalRouter);
