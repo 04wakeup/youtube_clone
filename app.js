@@ -6,7 +6,9 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import passport from "passport";
+import mongoose from "mongoose";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import { localsMiddlewares } from "./middlewares";
 import routes from "./routes";
 import userRouter from "./routers/userRouter";
@@ -16,6 +18,8 @@ import globalRouter from "./routers/globalRouter";
 import "./passport";
 
 var app = express();
+
+const CookieStore = MongoStore(session);
 // Middleware
 // helmet : set it for csp problem to play a video
 app.use(helmet({ contentSecurityPolicy: false }));
@@ -31,6 +35,7 @@ app.use(
     secret: process.env.COOKIE_SECRET, // from randomkey gen site randomly
     resave: true,
     saveUninitialized: false,
+    store: new CookieStore({ mongooseConnection: mongoose.connection }),
   })
 );
 app.use(passport.initialize()); // create info from cookie above(cookieParser)
