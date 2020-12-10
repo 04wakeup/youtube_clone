@@ -66,7 +66,7 @@ export const githubLoginCallback = async (accessToken, refreshToken, profile, cb
   }
 };
 
-export const postGithubLogin = (req, res) => {
+export const postGithubLogIn = (req, res) => {
   res.redirect(routes.home);
 };
 
