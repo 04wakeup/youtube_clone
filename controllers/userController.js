@@ -34,9 +34,11 @@ export const postLogin = passport.authenticate("local", {
   failureRedirect: routes.login,
   successRedirect: routes.home,
 });
-
+// GitHub Login
+// 1. Sends User to Github
 export const githubLogin = passport.authenticate("github");
 
+// 2. Check the user at Github
 export const githubLoginCallback = async (_, __, profile, cb) => {
   const {
     _json: { id, avatar_url: avatarUrl, name, email },
@@ -59,8 +61,21 @@ export const githubLoginCallback = async (_, __, profile, cb) => {
     return cb(error);
   }
 };
-
+// 3. Authentication Success & Redirect
 export const postGithubLogIn = (req, res) => {
+  res.redirect(routes.home);
+};
+
+// Facebook Login
+// 1. Sends user to FB, this calls >>> passport.js which calls  >>> 2(below)  >>> globalRouter >>> 3. Success & Redirect
+export const facebookLogin = passport.authenticate("facebook");
+
+// 2. Check the user at FB
+export const facebookLoginCallback = (accessToken, refreshToken, profile, cb) => {
+  console.log(accessToken, refreshToken, profile, cb);
+};
+// 3. Authentication Success & Redirect
+export const postFacebookLogin = (req, res) => {
   res.redirect(routes.home);
 };
 
@@ -70,6 +85,16 @@ export const logout = (req, res) => {
 };
 
 export const getMe = (req, res) => res.render("userDetail", { pageTitle: "User Detail", user: req.user }); // current logged user
-export const userDetail = (req, res) => res.render("userDetail", { pageTitle: "User Detail" });
+export const userDetail = async (req, res) => {
+  const {
+    params: { id },
+  } = req;
+  try {
+    const user = await User.findById({ _id: id }); // (id) is well also
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    res.redirect(routes.home);
+  }
+};
 export const editProfile = (req, res) => res.render("editProfile", { pageTitle: "Edit Profile" });
 export const changePassword = (req, res) => res.render("changePassword", { pageTitle: "Change Password" });
