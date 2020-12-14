@@ -40,7 +40,10 @@ export const postUpload = async (req, res) => {
     fileUrl: path,
     title,
     description,
+    creator: req.user.id,
   });
+  req.user.videos.push(newVideo.id); // add new video on a user
+  req.user.save();
   res.redirect(routes.videoDetail(newVideo.id));
 };
 
@@ -49,7 +52,8 @@ export const videoDetail = async (req, res) => {
     params: { id },
   } = req;
   try {
-    const video = await Video.findById(id); // find vidoe from db
+    const video = await Video.findById(id).populate("creator"); // find vidoe from db, then find user detail only USING Object ID!
+    console.log(video);
     res.render("videoDetail", { pageTitle: video.title, video });
   } catch (error) {
     res.redirect(routes.home);
