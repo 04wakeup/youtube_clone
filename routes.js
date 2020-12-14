@@ -27,9 +27,6 @@ const GITHUB_CALLBACK = "/auth/github/callback";
 const FB = "/auth/facebook";
 const FB_CALLBACK = "/auth/facebook/callback";
 
-// Image Base
-const BASE = "http://localhost:4000/";
-
 const routes = {
   home: HOME,
   join: JOIN,
@@ -74,7 +71,6 @@ const routes = {
   githubCallback: GITHUB_CALLBACK,
   facebook: FB,
   facebookCallback: FB_CALLBACK,
-  base: BASE,
 };
 
 export default routes;
