@@ -8,6 +8,10 @@ const totalTime = document.getElementById("totalTime");
 
 function handlePlayClick() {
   if (videoPlayer.paused) {
+    // if (totalTime.innerHTML === "00:00:00") {
+    //   // there is a delay when loading video metadata, this is alternative
+    //   setTotalTime();
+    // }
     videoPlayer.play();
     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
   } else {
@@ -75,12 +79,10 @@ const formatDate = (seconds) => {
 };
 
 function setTotalTime() {
-  const totalTimeString = formatDate(videoPlayer.duration); // format totla time
-  totalTime.innerHTML = totalTimeString;
-  setInterval(getCurrentTime, 1000);
+  totalTime.innerHTML = formatDate(videoPlayer.duration);
 }
 
-function getCurrentTime() {
+function setCurrentTime() {
   currentTime.innerHTML = formatDate(videoPlayer.currentTime); // if paused, currenttime alos stopps
 }
 
@@ -88,7 +90,9 @@ function init() {
   playBtn.addEventListener("click", handlePlayClick);
   volumeBtn.addEventListener("click", handleVolumeClick);
   fullScreenBtn.addEventListener("click", goFullScreen);
-  videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  // videoPlayer.addEventListener("loadedmetadata", setTotalTime);
+  videoPlayer.addEventListener("timeupdate", setCurrentTime);
+  setTimeout(setTotalTime, 100); // this is for async loading video meta
 }
 
 if (videoContainer) {
