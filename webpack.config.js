@@ -54,6 +54,7 @@ const config = {
     path: OUTPUT_DIR,
     filename: "[name].js",
   },
+  devtool: "cheap-module-source-map", // james: it enables dev alos uses main.js
   plugins: [
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
