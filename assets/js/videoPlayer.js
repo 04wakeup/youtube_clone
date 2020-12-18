@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const videoContainer = document.getElementById("jsVideoPlayer");
 const videoPlayer = document.querySelector("#jsVideoPlayer video");
 const playBtn = document.getElementById("jsPlayButton");
@@ -6,6 +8,15 @@ const fullScreenBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
+
+// don't need to wait: not using async/await so..
+const registerView = () => {
+  const videoId = window.location.href.split("videos")[1];
+  console.log(`/api${videoId}/view`);
+  fetch(`/api/${videoId}/view`, {
+    method: "POST", /// only POST is allowed to modify DB
+  });
+};
 
 function handlePlayClick() {
   if (videoPlayer.paused) {
@@ -96,6 +107,7 @@ function setCurrentTime() {
 }
 
 function handleEnded() {
+  registerView(); // increase the count of views
   videoPlayer.currentTime = 0;
   playBtn.innerHTML = '<i class="fas fa-play"></i>';
 }
