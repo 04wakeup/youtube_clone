@@ -31,6 +31,8 @@ const FB_CALLBACK = "/auth/facebook/callback";
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 
+// Comment
+const ADD_COMMENT = "/:id/commnet";
 const routes = {
   home: HOME,
   join: JOIN,
@@ -77,6 +79,7 @@ const routes = {
   facebookCallback: FB_CALLBACK,
   api: API,
   registerView: REGISTER_VIEW,
+  addComment: ADD_COMMENT,
 };
 
 export default routes;
