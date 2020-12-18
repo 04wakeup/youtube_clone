@@ -49,13 +49,11 @@ export const postUpload = async (req, res) => {
 };
 
 export const videoDetail = async (req, res) => {
-  console.log("here");
   const {
     params: { id },
   } = req;
   try {
-    const video = await Video.findById(id).populate("creator").populated("comments"); // find vidoe from db, then find user detail only USING Object ID!
-
+    const video = await Video.findById(id).populate("creator").populate("comments"); // find vidoe from db, then find user detail only USING Object ID!
     res.render("videoDetail", { pageTitle: video.title, video });
   } catch (error) {
     res.redirect(routes.home);
@@ -128,7 +126,7 @@ export const postRegisterView = async (req, res) => {
 };
 
 // Add Comment
-export const postAddCommnet = async (req, res) => {
+export const postAddComment = async (req, res) => {
   const {
     params: { id },
     body: { comment },
@@ -140,7 +138,7 @@ export const postAddCommnet = async (req, res) => {
       text: comment,
       creator: user.id,
     });
-    video.comments.push(newComment._id);
+    video.comments.push(newComment._id); // of can use append to reverse it
     video.save();
     res.status(200);
   } catch (error) {

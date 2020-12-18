@@ -1,9 +1,10 @@
+/* eslint-disable prettier/prettier */
 import express from "express";
 import routes from "../routes";
-import { postAddCommnet, postRegisterView } from "../controllers/videoController";
+import { postAddComment, postRegisterView } from "../controllers/videoController";
 
 const apiRouter = express.Router();
 apiRouter.post(routes.registerView, postRegisterView);
-apiRouter.post(routes.addComment, postAddCommnet);
+apiRouter.post(routes.addComment, postAddComment);
 
 export default apiRouter;
