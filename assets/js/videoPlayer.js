@@ -1,3 +1,5 @@
+import getBlobDuration from "get-blob-duration";
+
 const videoContainer = document.getElementById("jsVideoPlayer");
 const videoPlayer = document.querySelector("#jsVideoPlayer video");
 const playBtn = document.getElementById("jsPlayButton");
@@ -95,8 +97,11 @@ const formatDate = (seconds) => {
   return `${hours}:${minutes}:${totalSeconds}`;
 };
 
-function setTotalTime() {
-  totalTime.innerHTML = formatDate(videoPlayer.duration);
+async function setTotalTime() {
+  const blob = await fetch(videoPlayer.src).then((response) => response.blob()); // check the blob file to extract duration time using getBlobDuration
+  const duration = await getBlobDuration(blob);
+  const totalTimeString = formatDate(duration);
+  totalTime.innerHTML = totalTimeString;
 }
 
 function setCurrentTime() {
@@ -133,7 +138,7 @@ function init() {
   fullScreenBtn.addEventListener("click", goFullScreen);
   // videoPlayer.addEventListener("loadedmetadata", setTotalTime);
   videoPlayer.addEventListener("timeupdate", setCurrentTime);
-  setTimeout(setTotalTime, 500); // this is for async loading video meta
+  setTimeout(setTotalTime, 1000); // this is for async loading video meta
   videoPlayer.addEventListener("ended", handleEnded);
   volumeRange.addEventListener("input", handleDrag);
 }
