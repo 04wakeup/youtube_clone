@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 import routes from "../routes";
 import Video from "../models/Video";
@@ -34,11 +35,11 @@ export const getUpload = (req, res) => res.render("upload", { pageTitle: "Upload
 export const postUpload = async (req, res) => {
   const {
     body: { title, description },
-    file: { path },
+    file: { location },
   } = req;
   // insert data on DB
   const newVideo = await Video.create({
-    fileUrl: path,
+    fileUrl: location,
     title,
     description,
     creator: req.user.id,
