@@ -11,8 +11,7 @@ const s3 = new aws.S3({
   secretAccessKey: process.env.AWS_PRIVATE_KEY,
   region: "us-west-2",
 });
-console.log(process.env.AWS_KEY);
-console.log(process.env.AWS_PRIVATE_KEY);
+
 // const multerVideo = multer({ dest: "uploads/videos/" }); // upload video and return URL to save on db
 const multerVideo = multer({
   storage: multerS3({

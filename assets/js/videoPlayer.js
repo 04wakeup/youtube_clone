@@ -10,7 +10,6 @@ const volumeRange = document.getElementById("jsVolume");
 // don't need to wait: not using async/await so..
 const registerView = () => {
   const videoId = window.location.href.split("videos")[1];
-  console.log(`/api${videoId}/view`);
   fetch(`/api/${videoId}/view`, {
     method: "POST", /// only POST is allowed to modify DB
   });
