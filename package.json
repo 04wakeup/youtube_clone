@@ -5,14 +5,16 @@
   "main": "index.js",
   "author": "James Choi",
   "dependencies": {
+    "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.3",
-    "@babel/node": "^7.12.6",
+    "@babel/node": "^7.12.10",
     "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "autoprefixer": "^10.0.4",
     "aws-sdk": "^2.815.0",
     "axios": "^0.21.0",
     "babel-loader": "^8.2.2",
+    "babel-node": "0.0.1-security",
     "body-parser": "^1.19.0",
     "browserlist": "^1.0.1",
     "connect-mongo": "^3.2.0",
@@ -42,9 +44,14 @@
     "webpack-cli": "^4.2.0"
   },
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore '.scss' --ignore 'static'",
-    "dev:assets": "cross-env WEBPACK_ENV=development webpack -w",
-    "build:assets": "cross-env WEBPACK_ENV=production webpack",
+    "dev:server": "nodemon --exec babel-node src/init.js --delay 2 --ignore '.scss' --ignore 'static' ",
+    "dev:assets": "cd src && cross-env WEBPACK_ENV=development webpack -w",
+    "build:assets": "cd src && cross-env WEBPACK_ENV=production webpack",
+    "build:server": "babel src --out-dir build --ignore src/assets --ignore src/static --ignore src/webpack.config.js",
+    "copyAll": "xcopy src\\static build\\static /d /e /h /c /y /i && xcopy src\\views build\\views /d /e /h /c /y /i",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rd /s \"build\"",
+    "start": "node build/init.js",
     "tunnel": "lt --port 4000"
   },
   "devDependencies": {

@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import dotenv from "dotenv"; // hide important info
 dotenv.config();
 import app from "./app";
