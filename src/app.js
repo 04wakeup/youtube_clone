@@ -7,6 +7,7 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import path from "path";
+import flash from "express-flash";
 import passport from "passport";
 import mongoose from "mongoose";
 import session from "express-session";
@@ -42,6 +43,7 @@ app.use(
     store: new CookieStore({ mongooseConnection: mongoose.connection }),
   })
 );
+app.use(flash());
 app.use(passport.initialize()); // create info from cookie above(cookieParser)
 app.use(passport.session()); // save session
 
