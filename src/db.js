@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config(); // automatically loads .env contents
 
-mongoose.connect(process.env.PORDUCTION ? process.env.MONGO_URL_PROD : process.env.MONGO_URL, {
+mongoose.connect(process.env.PRODUCTION ? process.env.MONGO_URL_PROD : process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   //   userFindAndModify: false,
