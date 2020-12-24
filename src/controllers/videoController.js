@@ -38,6 +38,7 @@ export const postUpload = async (req, res) => {
     file: { location },
   } = req;
   // insert data on DB
+  console.log("hi");
   const newVideo = await Video.create({
     fileUrl: location,
     title,
