@@ -2,6 +2,9 @@
   "name": "wetube",
   "version": "1.0.0",
   "description": "Cloning Youtube with Vanilla and NodeJS",
+  "engines": {
+    "node": "12.18.4"
+  },
   "main": "index.js",
   "author": "James Choi",
   "dependencies": {
@@ -48,10 +51,11 @@
     "dev:assets": "cd src && cross-env WEBPACK_ENV=development webpack -w",
     "build:assets": "cd src && cross-env WEBPACK_ENV=production webpack",
     "build:server": "babel src --out-dir build --ignore src/assets --ignore src/static --ignore src/webpack.config.js",
-    "copyAll": "xcopy src\\static build\\static /d /e /h /c /y /i && xcopy src\\views build\\views /d /e /h /c /y /i",
+    "copyAll": "cp -R src/static build && cp -R src/views build",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
-    "prebuild": "rd /s \"build\"",
-    "start": "node build/init.js",
+    "prebuild": "rm -rf build",
+    "start": "PRODUCTION=true node build/init.js",
+    "prestart": "npm run build",
     "tunnel": "lt --port 4000"
   },
   "devDependencies": {
