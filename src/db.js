@@ -1,8 +1,10 @@
+/* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config(); // automatically loads .env contents
 
-mongoose.connect(process.env.MONGO_URL_PROD, {
+mongoose.connect(process.env.PORDUCTION ? process.env.MONGO_URL_PROD : process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   //   userFindAndModify: false,
