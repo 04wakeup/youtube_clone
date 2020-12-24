@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
+import dotenv from "dotenv";
+dotenv.config();
 import routes from "../routes";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
@@ -33,6 +35,8 @@ export const search = async (req, res) => {
 export const getUpload = (req, res) => res.render("upload", { pageTitle: "Upload" });
 
 export const postUpload = async (req, res) => {
+  console.log("key", process.env.AWS_KEY);
+  console.log("k2", process.env.AWS_PRIVATE_KEY);
   const {
     body: { title, description },
     file: { location },
