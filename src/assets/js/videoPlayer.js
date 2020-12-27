@@ -8,6 +8,12 @@ const fullScreenBtn = document.getElementById("jsFullScreen");
 const currentTime = document.getElementById("currentTime");
 const totalTime = document.getElementById("totalTime");
 const volumeRange = document.getElementById("jsVolume");
+const forward = document.getElementById("jsForward");
+const backward = document.getElementById("jsBackward");
+const runningBar = document.getElementById("jsRunningTime");
+const hoverTarget = document.querySelector(".videoPlayer__controls");
+let isHidden = false;
+let timeout;
 
 // don't need to wait: not using async/await so..
 const registerView = () => {
@@ -23,6 +29,7 @@ function handlePlayClick() {
     //   // there is a delay when loading video metadata, this is alternative
     //   setTotalTime();
     // }
+    setInterval(updateRunningBar, 1000); // keep checking the running time
     videoPlayer.play();
     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
   } else {
@@ -130,6 +137,51 @@ function handleDrag(event) {
     volumeBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
   }
 }
+function updateRunningBar() {
+  runningBar.value = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+}
+function handleRunningBar(event) {
+  // eslint-disable-next-line prettier/prettier
+  videoPlayer.currentTime = Math.floor((videoPlayer.duration * event.target.value) / 100);
+  console.log("---> ", videoPlayer.currentTime);
+}
+function goForward() {
+  videoPlayer.currentTime = videoPlayer.currentTime + 5.0;
+  if (videoPlayer.currentTime > videoPlayer.duration) {
+    videoPlayer.currentTime = videoPlayer.duration;
+  }
+}
+function goBackward() {
+  videoPlayer.currentTime = videoPlayer.currentTime - 5.0;
+  if (videoPlayer.currentTime < 0) {
+    videoPlayer.currentTime = 0;
+  }
+}
+function handleSpaceBar(event) {
+  if (event.code === "Space") {
+    handlePlayClick();
+  }
+}
+// check mouse move within last 2 seconds to control the titel and video controller
+function magicMouse() {
+  if (timeout) {
+    // this gurantee the time set to wait, time is set to zero
+    clearTimeout(timeout);
+  }
+  timeout = setTimeout(function () {
+    // every 5 seconds
+    if (!isHidden) {
+      document.querySelector("body").style.cursor = "none";
+      hoverTarget.style.opacity = 0;
+      isHidden = true;
+    }
+  }, 3000);
+  if (isHidden) {
+    document.querySelector("body").style.cursor = "auto";
+    hoverTarget.style.opacity = 1;
+    isHidden = false;
+  }
+}
 
 function init() {
   videoPlayer.volume = 0.5;
@@ -141,6 +193,14 @@ function init() {
   setTimeout(setTotalTime, 1000); // this is for async loading video meta
   videoPlayer.addEventListener("ended", handleEnded);
   volumeRange.addEventListener("input", handleDrag);
+  // 5 secs <>
+  forward.addEventListener("click", goForward);
+  backward.addEventListener("click", goBackward);
+  // update progress bar
+  runningBar.addEventListener("change", handleRunningBar);
+  // keyboard & mouse event
+  document.addEventListener("keyup", handleSpaceBar);
+  document.addEventListener("mousemove", magicMouse);
 }
 
 if (videoContainer) {
