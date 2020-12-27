@@ -1,3 +1,8 @@
+.video-detail__container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .videoPlayer {
     position: relative;
     &:hover {
@@ -19,6 +24,7 @@
       z-index: 9;
       bottom: 5px;
       width: 100%;
+      min-width: 1000px;
       background-color: rgba(0, 0, 0, 0.5);
       padding: 10px;
       display: grid;
