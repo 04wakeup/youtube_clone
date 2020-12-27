@@ -5,11 +5,19 @@
     .videoBlock:first-child,
     .videoBlock:nth-child(2){
         grid-column: span 3;
+        width: 100%; 
+        max-width: 450px;
+        justify-self: center; 
     }
-
+    
     .videoBlock:nth-child(3),
     .videoBlock:nth-child(4),
     .videoBlock:nth-child(5){
-        grid-column: span 2;
+        grid-column: span 2; 
+    }
+    .videoBlock__thumbnail{
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(111, 111, 167, 0.5);
+        border-radius: 5px;
     }
 }
