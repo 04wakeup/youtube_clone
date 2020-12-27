@@ -8,8 +8,9 @@ import "./models/Video";
 import "./models/Comment";
 import "./models/User";
 
-const PORT = process.env.PORT || 4001; // find PORT or use default as set
+const HOST = "0.0.0.0";
+const PORT = process.env.PORT || 4000; // find PORT or use default as set
 
 const handleListening = () => console.log(`listening on: http://localhost:${PORT}`);
 
-app.listen(PORT, handleListening);
+app.listen(PORT, HOST, handleListening);
