@@ -57,21 +57,21 @@ const routes = {
     if (id) {
       return `/videos/${id}`;
     } else {
-      return HOME;
+      return VIDEO_DETAIL;
     }
   },
   editVideo: (id) => {
     if (id) {
       return `/videos/${id}/edit`;
     } else {
-      return HOME;
+      return EDIT_VIDEO;
     }
   },
   deleteVideo: (id) => {
     if (id) {
       return `/videos/${id}/delete`;
     } else {
-      return HOME;
+      return DELETE_VIDEO;
     }
   },
   gitHub: GITHUB,
