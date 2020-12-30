@@ -101,7 +101,9 @@ export const getMe = async (req, res) => {
   } = req;
   console.log(">>>", id, "<<<<");
   try {
+    console.log("start?");
     const user = await User.findById({ id }).populate("videos"); // (id) is well also
+    console.log("end?", user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     res.redirect(routes.home);
