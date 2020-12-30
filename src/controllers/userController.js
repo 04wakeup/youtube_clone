@@ -110,6 +110,7 @@ export const logout = (req, res) => {
 //   }
 // };
 export const getMe = (req, res) => {
+  console.log("getme", req.user);
   res.render("userDetail", { pageTitle: "User Detail", user: req.user });
 };
 
