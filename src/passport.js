@@ -14,7 +14,10 @@ passport.use(
     {
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
-      callbackURL: process.env.PRODUCTION ? `https://murmuring-hollows-75711.herokuapp.com${routes.githubCallback}` : `http://localhost:4000${routes.githubCallback}`,
+      callbackURL: process.env.PRODUCTION ? `https://murmuring-hollows-75711.herokuapp.com${routes.githubCallback}` : `https://murmuring-hollows-75711.herokuapp.com${routes.githubCallback}`,
+      // if you set the callback url on github, above doesn't work.
+      // https://murmuring-hollows-75711.herokuapp.com/ for homepage
+      // https://murmuring-hollows-75711.herokuapp.com/auth/github/callback for Auth call back UR
     },
     githubLoginCallback
   )

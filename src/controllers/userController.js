@@ -99,7 +99,7 @@ export const getMe = async (req, res) => {
   const {
     user: { id }, // it's different from direct access with userDetila
   } = req;
-  console.log(id);
+  console.log(">>>", id, "<<<<");
   try {
     const user = await User.findById({ _id: id }).populate("videos"); // (id) is well also
     res.render("userDetail", { pageTitle: "User Detail", user });
