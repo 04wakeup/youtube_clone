@@ -111,6 +111,7 @@ export const logout = (req, res) => {
 // };
 export const getMe = (req, res) => {
   console.log("getme", req.user);
+  // not redirect, it's render
   res.render("userDetail", { pageTitle: "User Detail", user: req.user });
 };
 
