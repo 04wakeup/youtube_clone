@@ -120,11 +120,9 @@ export const userDetail = async (req, res) => {
     params: { id }, // it's different from getME!
   } = req;
   try {
-    console.log("000000000");
-    const user = await User.findById({ _id: id }); // .populate("videos"); // (id) is well also
-    console.log("11111111", user);
+    const user = await User.findById({ _id: id }).populate("videos"); // (id) is well also
+
     res.render("userDetail", { pageTitle: "User Detail", user });
-    console.log("222222222");
   } catch (error) {
     req.flash("error", "User not found");
     res.redirect(routes.home);
