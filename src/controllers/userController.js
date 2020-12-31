@@ -111,7 +111,6 @@ export const logout = (req, res) => {
 // };
 export const getMe = (req, res) => {
   // not redirect, it's render
-  console.log("check out->", req.user);
   res.render("userDetail", { pageTitle: "User Detail", user: req.user });
 };
 
@@ -135,15 +134,20 @@ export const postEditProfile = async (req, res) => {
     file,
   } = req;
   try {
-    await User.findOneAndUpdate(req.user.id, {
+    await User.findByIdAndUpdate(req.user.id, {
       name,
       email,
       avatarUrl: file ? file.location : req.user.avatarUrl,
     });
-    console.log("hre?--------------------");
-    req.flash("success", "Profile updated.");
     // get the session info from middleware, so id is changed, session is broken!!!
-    res.redirect(routes.me);
+    if (res.locals.loggedUser.email !== email) {
+      // email(ID) is changed, then log out to refresh the cookie
+      req.flash("info", "Profile updated. You need to login again");
+      res.redirect(routes.logout);
+    } else {
+      res.redirect(routes.me);
+      req.flash("success", "Profile updated.");
+    }
   } catch (error) {
     req.flash("error", "Can't update profile.");
     res.redirect(`/users${routes.editProfile}`);
