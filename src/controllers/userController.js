@@ -109,9 +109,18 @@ export const logout = (req, res) => {
 //     res.redirect(routes.home);
 //   }
 // };
-export const getMe = (req, res) => {
+export const getMe = async (req, res) => {
   // not redirect, it's render
-  res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+  // console.log(req.user);
+  // res.render("userDetail", { pageTitle: "User Detail", user: req.user });
+
+  try {
+    const user = await User.findById({ _id: req.user.id }).populate("videos"); // (id) is well also
+    res.render("userDetail", { pageTitle: "User Detail", user });
+  } catch (error) {
+    req.flash("error", "User not found");
+    res.redirect(routes.home);
+  }
 };
 
 export const userDetail = async (req, res) => {
@@ -120,7 +129,6 @@ export const userDetail = async (req, res) => {
   } = req;
   try {
     const user = await User.findById({ _id: id }).populate("videos"); // (id) is well also
-
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     req.flash("error", "User not found");
