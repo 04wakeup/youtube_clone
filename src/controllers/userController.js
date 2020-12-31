@@ -35,7 +35,7 @@ export const postLogin = passport.authenticate("local", {
   failureRedirect: routes.login,
   successRedirect: routes.home,
   successFlash: "Welcome", // use flash()
-  failureFlash: "Can't log in",
+  failureFlash: "Can't log in. Please check your password.",
 });
 // GitHub Login
 // 1. Sends User to Github
@@ -110,8 +110,8 @@ export const logout = (req, res) => {
 //   }
 // };
 export const getMe = (req, res) => {
-  console.log("getme", req.user);
   // not redirect, it's render
+  console.log("check out->", req.user);
   res.render("userDetail", { pageTitle: "User Detail", user: req.user });
 };
 
@@ -135,16 +135,18 @@ export const postEditProfile = async (req, res) => {
     file,
   } = req;
   try {
-    await User.findByIdAndUpdate(req.user.id, {
+    await User.findOneAndUpdate(req.user.id, {
       name,
       email,
       avatarUrl: file ? file.location : req.user.avatarUrl,
     });
+    console.log("hre?--------------------");
     req.flash("success", "Profile updated.");
+    // get the session info from middleware, so id is changed, session is broken!!!
     res.redirect(routes.me);
   } catch (error) {
     req.flash("error", "Can't update profile.");
-    res.redirect(routes.editProfile);
+    res.redirect(`/users${routes.editProfile}`);
   }
 };
 export const getChangePassword = (req, res) => res.render("changePassword", { pageTitle: "Change Password" });
