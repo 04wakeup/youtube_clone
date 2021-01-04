@@ -8,8 +8,8 @@ block content
                 input(type="file", id="avatar", name="avatar", accept="image/*")
             input(type="text", placeholder="Name", name="name", value=loggedUser.name)
             if (loggedUser.githubId) 
-                input(type="email", placeholder="Email", name="email", value=loggedUser.email, readonly)
+                input.nonEdit-Email(type="email", placeholder="Email", name="email", value=loggedUser.email, readonly)
             else 
                 input(type="email", placeholder="Email", name="email", value=loggedUser.email)
-            h4=`${loggedUser.githubId ? '* SNS Account cant change e-mail address.' : ""}`
+            h4=`${loggedUser.githubId ? "* SNS Account can't change e-mail address." : ""}`
             input(type="submit", value="Update Profile")
