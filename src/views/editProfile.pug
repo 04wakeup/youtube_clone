@@ -7,5 +7,9 @@ block content
                 label(for="avatar") Avatar
                 input(type="file", id="avatar", name="avatar", accept="image/*")
             input(type="text", placeholder="Name", name="name", value=loggedUser.name)
-            input(type="email", placeholder="Email", name="email", value=loggedUser.email)
+            if (loggedUser.githubId) 
+                input(type="email", placeholder="Email", name="email", value=loggedUser.email, readonly)
+            else 
+                input(type="email", placeholder="Email", name="email", value=loggedUser.email)
+            h4=`${loggedUser.githubId ? '* SNS Account cant change e-mail address.' : ""}`
             input(type="submit", value="Update Profile")
