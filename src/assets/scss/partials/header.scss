@@ -10,6 +10,19 @@
         align-items: center;
         .header__column{
            padding: 5px 0px;
+           &:first-child{
+               a{
+                   i{
+                       margin-right: 5px;
+                   }
+                   display: flex;
+                   color: white; 
+                   align-items: center;
+                   font-weight: 600;
+                   letter-spacing: 5px;
+                   font-size: 20px;
+               }
+           }
            form {
                display: flex;
                button {
