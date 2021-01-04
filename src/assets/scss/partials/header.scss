@@ -10,6 +10,15 @@
         align-items: center;
         .header__column{
            padding: 5px 0px;
+           form {
+               display: flex;
+               button {
+                   background-color: #EA232C;
+                   i {
+                    font-size: 20px;
+                   }
+               }
+           }
             i{
                 color: white;
                 font-size: 30px;
@@ -28,6 +37,14 @@
                 text-transform: uppercase;
                 li:not(:last-child){
                     margin-right: 15px;
+                }
+            }
+            li a{
+                display: flex;
+                div{
+                    &:first-child{
+                        margin-right: 5px;
+                    }
                 }
             }
 
