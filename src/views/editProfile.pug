@@ -11,5 +11,5 @@ block content
                 input.nonEdit-Email(type="email", placeholder="Email", name="email", value=loggedUser.email, readonly)
             else 
                 input(type="email", placeholder="Email", name="email", value=loggedUser.email)
-            h4=`${loggedUser.githubId ? "* SNS Account can't change e-mail address." : ""}`
+            h4.warning=`${loggedUser.githubId ? "* SNS user can't change e-mail address." : ""}`
             input(type="submit", value="Update Profile")

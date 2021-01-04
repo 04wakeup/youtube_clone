@@ -20,7 +20,7 @@
     padding: 20px;
     z-index: 9;
     text-align: center;
-    animation: flashAnimation 3s ease-in-out forwards;
+    animation: flashAnimation 1.5s ease-in-out forwards;
     &.error{
         background-color: #d35400;
     }
