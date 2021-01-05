@@ -19,6 +19,7 @@ export const postJoin = async (req, res, next) => {
       const user = await User({
         name,
         email,
+        isLocalUser: true,
       });
       await User.register(user, password);
       next();
@@ -131,7 +132,7 @@ export const getMe = async (req, res) => {
   // not redirect, it's render
   try {
     const user = await User.findById({ _id: req.user.id }).populate("videos"); //  _id and id are sometimes not recognized either one
-
+    console.log("info---------", user);
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     req.flash("error", "User not found");

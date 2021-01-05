@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
   facebookId: Number,
   githubId: Number,
   googleId: Number,
+  isLocalUser: Boolean,
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId, // put the id of comment
