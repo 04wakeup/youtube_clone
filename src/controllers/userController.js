@@ -72,6 +72,39 @@ export const postGithubLogIn = (req, res) => {
   res.redirect(routes.home);
 };
 
+// Google Login
+// 1. Sends User to Github
+export const googleLogin = passport.authenticate("google", { scope: ["profile", "email"] }); // add Email in Profile as a result
+
+// 2. Check the user at Google
+export const googleLoginCallback = async (accessToken, refreshToken, profile, cb) => {
+  const {
+    _json: { sub: id, picture: avatarUrl, name, email }, // id :  google id
+  } = profile;
+  try {
+    const user = await User.findOne({ email });
+    if (user) {
+      user.googleId = id; // save it, as it may be changed in Google
+      user.save();
+      return cb(null, user);
+    }
+    // Ensure User Model's column definition
+    const newUser = await User.create({
+      name,
+      googleId: id,
+      avatarUrl,
+      email,
+    });
+    return cb(null, newUser);
+  } catch (error) {
+    return cb(error);
+  }
+};
+// 3. Authentication Success & Redirect
+export const postGoogleLogIn = (req, res) => {
+  res.redirect(routes.home);
+};
+
 // Facebook Login
 // 1. Sends user to FB, this calls >>> passport.js which calls  >>> 2(below)  >>> globalRouter >>> 3. Success & Redirect
 export const facebookLogin = passport.authenticate("facebook", {
@@ -94,28 +127,12 @@ export const logout = (req, res) => {
   res.redirect(routes.home);
 };
 
-// => res.render("userDetail", { pageTitle: "User Detail", user: req.user }); // current logged user
-// export const getMe = async (req, res) => {
-//   const {
-//     user: { id }, // it's different from direct access with userDetila
-//   } = req;
-//   console.log(">>>", id, "<<<<");
-//   try {
-//     console.log("start?");
-//     const user = await User.findById({ id }).populate("videos"); // (id) is well also
-//     console.log("end?", user);
-//     res.render("userDetail", { pageTitle: "User Detail", user });
-//   } catch (error) {
-//     res.redirect(routes.home);
-//   }
-// };
 export const getMe = async (req, res) => {
   // not redirect, it's render
-  // console.log(req.user);
-  // res.render("userDetail", { pageTitle: "User Detail", user: req.user });
-
+  console.log("req", req.user);
+  console.log("req User", req.user._id);
   try {
-    const user = await User.findById({ _id: req.user.id }).populate("videos"); // (id) is well also
+    const user = await User.findById({ _id: req.user.id || req.user._id }).populate("videos"); //  _id and id are sometimes not recognized either one
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     req.flash("error", "User not found");
