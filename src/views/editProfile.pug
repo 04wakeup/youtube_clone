@@ -7,9 +7,9 @@ block content
                 label(for="avatar") Avatar
                 input(type="file", id="avatar", name="avatar", accept="image/*")
             input(type="text", placeholder="Name", name="name", value=loggedUser.name)
-            if (loggedUser.githubId) 
+            if (loggedUser.githubId || loggedUser.googleId) 
                 input.nonEdit-Email(type="email", placeholder="Email", name="email", value=loggedUser.email, readonly)
             else 
                 input(type="email", placeholder="Email", name="email", value=loggedUser.email)
-            h4.warning=`${loggedUser.githubId ? "* SNS user can't change e-mail address." : ""}`
+            h4.warning=`${loggedUser.githubId || loggedUser.googleId ? "* SNS user can't change e-mail address." : ""}`
             input(type="submit", value="Update Profile")

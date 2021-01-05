@@ -129,10 +129,11 @@ export const logout = (req, res) => {
 
 export const getMe = async (req, res) => {
   // not redirect, it's render
-  console.log("req", req.user);
-  console.log("req User", req.user._id);
+  console.log("req User _id", req.user._id);
+  console.log("req User id", req.user.id);
   try {
     const user = await User.findById({ _id: req.user.id || req.user._id }).populate("videos"); //  _id and id are sometimes not recognized either one
+
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
     req.flash("error", "User not found");

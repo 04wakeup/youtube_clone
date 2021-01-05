@@ -51,18 +51,18 @@ passport.use(
 
 // put it before using Strategies???
 // this works ONLY for Github login not Google...
-// passport.serializeUser(User.serializeUser());
-// // passport.deserializeUser(function (id, done) {
-// //   User.findById(id, function (err, user) {
-// //     done(err, user);
-// //   });
-// // });
-// passport.deserializeUser(User.deserializeUser());
+passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(function (id, done) {
+//   User.findById(id, function (err, user) {
+//     done(err, user);
+//   });
+// });
+passport.deserializeUser(User.deserializeUser());
 
-passport.serializeUser(function (user, done) {
-  done(null, user);
-});
+// passport.serializeUser(function (user, done) {
+//   done(null, user);
+// });
 
-passport.deserializeUser(function (user, done) {
-  done(null, user);
-});
+// passport.deserializeUser(function (user, done) {
+//   done(null, user);
+// });
