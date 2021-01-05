@@ -9,7 +9,7 @@ block content
             else 
                 img.u-avatar(src="https://jameswetube2.s3-us-west-2.amazonaws.com/avatar/noImage.png")
             h4.profile__username=user.name 
-        if loggedUser && (user.id === loggedUser.id || user._id === loggedUser.id) 
+        if loggedUser && (user.id === loggedUser.id) 
             .user-profile__btns 
                 a(href=`/users${routes.editProfile}`)
                     button 🖍 Edit Profile
