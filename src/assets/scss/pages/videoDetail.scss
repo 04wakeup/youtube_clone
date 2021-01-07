@@ -48,6 +48,7 @@
     .video__comments {
         margin-top: 25px;
         text-align: center;
+        width: 50%;
         .video__comment-number {
           font-size: 18px;
         }
@@ -56,6 +57,15 @@
           width: 100%;
           input {
             width: 100%;
+            border-radius: 0px;
+            border-bottom: 1px solid gray;
+            background-color: #F5F5F5;
+            font-weight: 400;
+            &:focus{
+              // background-color: gray;
+              border-bottom: 2px solid black;
+              font-weight: 600;
+            }
           }
         }
     .video__comments-list {
