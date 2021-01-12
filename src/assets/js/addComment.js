@@ -2,10 +2,11 @@ import axios from "axios";
 const addCommentForm = document.getElementById("jsAddComment");
 const commentList = document.getElementById("jsCommentList");
 const commentNumber = document.getElementById("jsCommentNumber");
+const commentPlural = document.getElementById("jsCommentText");
 
 const increaseNumber = () => {
-  console.log(commentNumber.innerHTML);
   commentNumber.innerHTML = parseInt(commentNumber.innerHTML, 10) + 1;
+  commentPlural.innerHTML = commentNumber.innerHTML > 1 ? " comments" : " comment";
 };
 
 const addComment = (comment) => {

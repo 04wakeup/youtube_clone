@@ -56,6 +56,7 @@ export const videoDetail = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id).populate("creator").populate("comments"); // find vidoe from db, then find user detail only USING Object ID!
+    // console.log("here", res.locals.loggedUser.avatarUrl);
     res.render("videoDetail", { pageTitle: video.title, video });
   } catch (error) {
     res.redirect(routes.home);

@@ -46,40 +46,59 @@
         font-size: 16px;
     }
     .video__comments {
-        margin-top: 25px;
-        text-align: center;
+        margin-top: 35px;
+        text-align: left;
         width: 50%;
         .video__comment-number {
           font-size: 18px;
+          display: block;
         }
-        .add__comment {
+        .user__comment{
+          display: flex;
           margin-top: 25px;
           width: 100%;
-          input {
+          .u-avatar{
+            width: 40px;
+            height: 40px;
+            margin-right: 25px;
+          }
+          .add__comment { 
             width: 100%;
-            border-radius: 0px;
-            border-bottom: 1px solid gray;
-            background-color: #F5F5F5;
-            font-weight: 400;
-            &:focus{
-              // background-color: gray;
-              border-bottom: 2px solid black;
-              font-weight: 600;
+            input {
+              // width: 100%;
+              border-radius: 0px;
+              border-bottom: 1px solid gray;
+              background-color: #F5F5F5;
+              font-weight: 400;
+              &:focus{
+                // background-color: gray;
+                border-bottom: 2px solid black;
+                font-weight: 600;
+              }
             }
           }
         }
-    .video__comments-list {
-        margin-top: 50px;
-        li {
-          background-color: #3498db;
-          color: white;
-          padding: 15px;
-          border-radius: 20px;
-          border-bottom-left-radius: 0px;
-          &:not(:last-child) {
-            margin-bottom: 15px;
+      
+        h1 {
+          color: rgba(255, 0, 0, 0.5);
+          margin-top: 25px;
+        }
+      
+      .video__comments-list {
+          margin-top: 50px; 
+          li {
+            background-color: white;
+            color: rgba(0,0,0,0.5);
+            padding: 15px;
+            border-radius: 5px;
+            // border-bottom-left-radius: 0px;
+            &:not(:last-child) {
+              margin-bottom: 15px;
+            }
+            box-shadow: 1px 1px 1px rgb(190, 190, 190);
           }
         }
-      }
     }
+    
+
   }

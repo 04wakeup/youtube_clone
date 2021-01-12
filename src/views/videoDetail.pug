@@ -19,7 +19,7 @@ block content
             .video__author 
                 |Uploaded by 
                 a(href=routes.userDetail(video.creator.id))=video.creator.name
-        .video__comments
+        .video__comments 
             if video.comments.length === 1 || video.comments.length === 0
                 span.video__comment-number
                     span#jsCommentNumber=`${video.comments.length ? 1 : 0}`
@@ -28,8 +28,16 @@ block content
                 span.video__comment-number
                     span#jsCommentNumber=video.comments.length
                     span#jsCommentText=` comments`
-            form.add__comment#jsAddComment
-                input(type="text", placeholder="Add a comment")
+            div.user__comment 
+                if loggedUser && loggedUser.avatarUrl 
+                    img.u-avatar(src=`${loggedUser.avatarUrl && loggedUser.avatarUrl.includes("http") ? loggedUser.avatarUrl : `/${loggedUser.avatarUrl}` }`)
+                else if loggedUser
+                    img.u-avatar(src="https://jameswetube2.s3-us-west-2.amazonaws.com/avatar/noImage.png") 
+                if loggedUser 
+                    form.add__comment#jsAddComment
+                        input(type="text", placeholder="Add a comment")
+                else 
+                    h1="* Please login to write a comment."
             ul.video__comments-list#jsCommentList
                 each comment in video.comments.reverse()
                     li
