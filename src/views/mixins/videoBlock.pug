@@ -7,13 +7,15 @@ mixin videoBlock(video = {})
             .video__detail
                 .video__detail__image
                     .creator-avatar
-                        if video.avatarUrl 
-                            img.u-avatar(src=`${video.avatarUrl.includes("http") ? video.avatarUrl : `/${video.avatarUrl}` }`)
-                        else
-                            img.u-avatar(src="https://jameswetube2.s3-us-west-2.amazonaws.com/avatar/noImage.png") 
+                        if (video.name)
+                            if video.avatarUrl 
+                                img.u-avatar(src=`${video.avatarUrl.includes("http") ? video.avatarUrl : `/${video.avatarUrl}` }`)
+                            else
+                                img.u-avatar(src="https://jameswetube2.s3-us-west-2.amazonaws.com/avatar/noImage.png") 
                 .video__detail__info
-                    h4.videoBlock__title=video.title 
-                    h6.videoBlock__owner=video.name
+                    h4.videoBlock__title=video.title
+                    if (video.name)
+                        h6.videoBlock__owner=video.name
                     .view-date__info
                         if video.views === 1
                             h6.videoBlock__views 1 view 
