@@ -8,9 +8,6 @@ export const home = async (req, res) => {
   // use async, await to handle data asynchrously
   try {
     const videos = await Video.find({}).populate("creator").sort({ _id: -1 });
-    // const videos = await Video.find({}).sort({ _id: -1 });
-    // const video = await Video.findById(id).populate("creator").populate("comments");
-    console.log("here-----", videos[0].creator.name);
     res.render("home", { pageTitle: "Home", videos });
   } catch (error) {
     console.log(error);

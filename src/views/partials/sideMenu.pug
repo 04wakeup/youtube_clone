@@ -1,12 +1,44 @@
 .sideMenu 
     ul
-        li="Home"
-        li="Trending"
-        li="Subscriptions"
+        li
+            a(href=routes.home)
+                span
+                    i.fas.fa-home
+                    |Home
+        li
+            a(href="#")
+                span
+                    i.fab.fa-hotjar
+                    |Trending
+        li 
+            a(href="#")
+                span 
+                    i.fas.fa-satellite-dish
+                    |Subscriptions
     ul 
-        li="Library"
-        li="History"
-        li="Your videos"
-        li="Watch later"
-        li="Liked videos"
+        li
+            a(href="#")
+                span
+                    i.fas.fa-photo-video
+                    |Library
+        li 
+            a(href="#")
+                span
+                    i.fas.fa-history
+                    |History
+        li
+            a(href=routes.me)
+                span
+                    i.fas.fa-video
+                    |Your videos
+        li
+            a(href="#")
+                span
+                    i.fas.fa-stopwatch
+                    |Watch later
+        li
+            a(href="#")
+                span
+                    i.far.fa-thumbs-up
+                    |Liked videos
     h6="SUBSCRIPTIONS"
