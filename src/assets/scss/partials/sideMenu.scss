@@ -20,3 +20,9 @@
         color: #606060;
     }
 }
+
+@media screen and (max-width: 1600px){
+    .sideMenu{
+        display: none;
+    }
+}
