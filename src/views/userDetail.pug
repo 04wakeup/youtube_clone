@@ -23,5 +23,6 @@ block content
                     title: item.title,
                     views: item.views,
                     videoFile: item.fileUrl,
-                    createdAt: item.createdAt
+                    createdAt: item.createdAt,
+                    avatarUrl: `${user.avatarUrl ? (user.avatarUrl.includes("http") ? user.avatarUrl : `/${user.avatarUrl}`) : "https://jameswetube2.s3-us-west-2.amazonaws.com/avatar/noImage.png" }`
                 })

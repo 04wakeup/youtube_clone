@@ -132,7 +132,7 @@ export const getMe = async (req, res) => {
   // not redirect, it's render
   try {
     const user = await User.findById({ _id: req.user.id }).populate("videos"); //  _id and id are sometimes not recognized either one
-    console.log("here", user);
+    console.log("mmmmeeee", user.avatarUrl);
     // const videos = await Video.find({}).populate("creator").sort({ _id: -1 });
     res.render("userDetail", { pageTitle: "User Detail", user });
   } catch (error) {
