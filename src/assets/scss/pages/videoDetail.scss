@@ -18,6 +18,16 @@
         width: 100%;
         max-width: 850px;
         margin-top: 25px;
+        .video__title{
+          font-weight: 600;
+          margin-bottom: 20px;
+        }
+        .video__description{
+          margin-bottom: 25px;
+        }
+        .video__views{
+          margin-bottom: 5px;
+        }
     }
     button{
         width: 100px;
@@ -31,8 +41,7 @@
     .video__title, 
     .video__views,
     .video__description{
-        display: block;
-        margin-bottom: 15px;
+        display: block; 
     }
 
     .video__title{
