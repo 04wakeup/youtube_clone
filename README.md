@@ -1,15 +1,15 @@
 # WeTube
----
+
 ## Overview
 This project is for handling videos like YouTube with fullstack technologies. An user can create
 an account using OAuth, record a self video, upload videos and put comments on each video.
 Editing user and video information is available. We can operate a video community with this site.
 
 ## Technology Stack
-* Front End: HTML(Pug), CSS(SCSS), JavaScript(ES6), AJAX, Babel, Webpack
-* Back End: NodeJS, Express, Passport, MongoDB Atlas, AWS S3, Multer
-* Infrastructure: Heroku
-* Workflow
+* **Front End**: HTML(Pug), CSS(SCSS), JavaScript(ES6), AJAX, Babel, Webpack
+* **Back End**: NodeJS, Express, Passport, MongoDB Atlas, AWS S3, Multer
+* **Infrastructure**: Heroku
+* **Workflow**
   ![Workflow](./resources/Workflow.PNG)
   *[Workflow]*
   
