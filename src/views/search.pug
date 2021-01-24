@@ -12,5 +12,8 @@ block content
                 title: item.title,
                 views: item.views,
                 videoFile: item.fileUrl,
-                id:item.id
+                id:item.id,
+                createdAt: item.createdAt,
+                name: item.creator.name,
+                avatarUrl: item.creator.avatarUrl
             })

@@ -24,6 +24,7 @@ The [DEMO](https://murmuring-hollows-75711.herokuapp.com/) site is up, you can e
 ## Features
 * **Video**
   * Upload - video format can be uploaded
+  * Search - use keywords to search videos
   * Edit - title, contents
   * Record - self video
   * Owner Information - display owner name and link to their home
